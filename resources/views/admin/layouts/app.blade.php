@@ -27,13 +27,14 @@
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item p-2">
-                    <a href="#" class="nav-link text-white active">Dashboard</a>
+                    <a href="{{ route('admin.dashboard') }}" class="text-white active">Dashboard</a>
                 </li>
                 <li class="nav-item p-2">
-                    <a href="#" class="nav-link text-white">Leave Applications</a>
+                    <a href="{{ route('admin.employees.index') }}" class="text-white">All Employees</a>
                 </li>
+                {{-- nav-link --}}
                 <li class="nav-item p-2">
-                    <a href="#" class="nav-link text-white">Settings</a>
+                    <a href="#" class="text-white">Settings</a>
                 </li>
             </ul>
         </div>

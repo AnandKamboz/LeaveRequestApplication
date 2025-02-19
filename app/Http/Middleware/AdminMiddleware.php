@@ -18,13 +18,15 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
          if (!empty(Auth::user()->id)) {
-            $group =  RoleType::where('user_id', Auth::user()->id)->first();
-            if ($group->role_id == '2') {
+            $group =  RoleType::where('user_id', Auth::user()->id)->get();
+            $roleIds = RoleType::where('user_id', Auth::user()->id)->pluck('role_id')->toArray();
+
+              if (in_array(1, $roleIds) && in_array(2, $roleIds)) {
                 return $next($request);
-            } else {
+              }else{
                 Auth::logout();
                 return redirect('login');
-            }
+              }
         } 
 
     }
