@@ -1,7 +1,8 @@
 @extends('admin.layouts.app')
 
-@section('content')
+@section('title', 'Dashboard')
 
+@section('content')
 <div class="dashboard-panel">
     <div class="row">
         <div class="col-md-4">
@@ -60,5 +61,4 @@
         </table>
     </div>
 </div>
-
 @endsection
