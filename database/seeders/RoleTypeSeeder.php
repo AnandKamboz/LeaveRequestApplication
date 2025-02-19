@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\RoleType;
+use App\Models\User;
 
 class RoleTypeSeeder extends Seeder
 {
@@ -14,7 +15,9 @@ class RoleTypeSeeder extends Seeder
     public function run(): void
     {
         RoleType::insert([
+            ['user_id' => 1, 'role_id' => 1],
             ['user_id' => 1, 'role_id' => 2],
+            ['user_id' => 2, 'role_id' => 1],
             ['user_id' => 2, 'role_id' => 2],
         ]);
     }

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Session;
 
+
 class LoginController extends Controller {
     public function index() {
         return view( 'login' );
@@ -46,6 +47,17 @@ class LoginController extends Controller {
     }
 
     public function verifyOtp( $id, Request $request ) {
+        //  $group =  RoleType::where('user_id', Auth::user()->id)->get();
+        //  $roleIds = RoleType::where('user_id', Auth::user()->id)->pluck('role_id')->toArray();
+
+        
+        //  if (in_array(1, $roleIds) && in_array(2, $roleIds)) {
+        //    dd("Hello !");
+        //  }else{
+        //     dd("Bye");
+        //  }
+
+
         $request->validate( [
             'otp' => 'required',
             'captcha_input' => 'required',
@@ -80,11 +92,11 @@ class LoginController extends Controller {
             $otp->save();
             $user = User::where( 'secure_id', $otp[ 'user_id' ] )->first();
             Auth::login( $user );
-            $group = RoleType::where( 'user_id', $user->id )->first();
-            if ( $group && $group->role_id == 2 ) {
+            $group =  RoleType::where('user_id', Auth::user()->id)->get();
+            $roleIds = RoleType::where('user_id', Auth::user()->id)->pluck('role_id')->toArray();
+            if ( in_array(1, $roleIds) && in_array(2, $roleIds) ) {
                 return redirect( 'admin/dashboard' )->with( 'success', 'Login Successfully!' );
             }
-
         } elseif ( $otp && now()->greaterThan( $otp->expires_at ) ) {
             return back()->withErrors( [ 'otp' => 'The OTP has expired. Please request a new one.' ] );
         }
