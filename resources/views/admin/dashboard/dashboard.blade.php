@@ -1,64 +1,41 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Cash Award Form')
+
+@section('page-title', 'Apply for Cash Award')
 
 @section('content')
-<div class="dashboard-panel">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="panel-box green">
-                <h2>413</h2>
-                <p>Total Applications</p>
-                <a href="#">More Info</a>
+<link rel="stylesheet" href="{{ asset('css/admin/dashboard/dashboard.css') }}">
+<div class="form-container animate_animated animate_zoomIn">
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="dashboard-card bg-primary">
+                <i class="fas fa-file-alt icon"></i>
+                <h5>Total Applications</h5>
+                <p>150</p>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="panel-box yellow">
-                <h2>0</h2>
-                <p>Recommended by DSO</p>
-                <a href="#">More Info</a>
+        <div class="col-md-3">
+            <div class="dashboard-card bg-success">
+                <i class="fas fa-check-circle icon"></i>
+                <h5>Approved</h5>
+                <p>100</p>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="panel-box red">
-                <h2>0</h2>
-                <p>Action by HQ</p>
-                <a href="#">More Info</a>
+        <div class="col-md-3">
+            <div class="dashboard-card bg-warning">
+                <i class="fas fa-hourglass-half icon"></i>
+                <h5>Pending</h5>
+                <p>30</p>
             </div>
         </div>
-    </div>
-
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Game Name</th>
-                    <th>Total Applications</th>
-                    <th>View Application</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Wrestling</td>
-                    <td>56</td>
-                    <td><button class="btn btn-primary">View</button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Hockey</td>
-                    <td>50</td>
-                    <td><button class="btn btn-primary">View</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Athletics</td>
-                    <td>48</td>
-                    <td><button class="btn btn-primary">View</button></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="col-md-3">
+            <div class="dashboard-card bg-danger">
+                <i class="fas fa-times-circle icon"></i>
+                <h5>Rejected</h5>
+                <p>20</p>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

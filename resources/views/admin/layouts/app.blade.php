@@ -4,64 +4,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Dashboard')</title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('admin/adminlayout/app.css') }}">
-
-    {{-- Toastr CSS --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-</head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ asset('css/admin/adminlayout/app.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#sidebar-collapse" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Your Brand</a>
+    <div class="d-flex">
+        <div class="sidebar animate_animated animate_fadeInLeft " id="sidebar">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="profile-card">
+                    <div class="profile-header"></div>
+                    <img src="{{ asset('/images/image.png') }}" alt="Profile Picture" class="rounded-circle profile-img"
+                        width="80" height="80">
+                    <p class="profile-name">{{ ucfirst(Auth::user()->name) }}</p>
+                    <p class="profile-text">Department of IT, Haryana Government</p>
+                    <p class="profile-text">सहारनपुर, उत्तर प्रदेश</p>
+                    <p class="profile-badge"><span>Department of IT</span></p>
+                    <p class="profile-badge"><span>Government of Haryana</span></p>
+                </div>
             </div>
+            <ul class="nav flex-column">
+                <li class="nav-item p-2">
+                    <a href="#" class="nav-link text-white active">Dashboard</a>
+                </li>
+                <li class="nav-item p-2">
+                    <a href="#" class="nav-link text-white">Leave Applications</a>
+                </li>
+                <li class="nav-item p-2">
+                    <a href="#" class="nav-link text-white">Settings</a>
+                </li>
+            </ul>
         </div>
-    </nav>
 
-    <div class="container-fluid">
-        <div class="row row-offcanvas row-offcanvas-left">
-            <div class="col-sm-3 col-xs-6 sidebar sidebar-offcanvas" id="sidebar-collapse" role="navigation">
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#">Dashboard</a></li>
-                    <li><a href="#">Applications</a></li>
-                    <li><a href="#">Download Report</a></li>
-                    <li><a href="#">User</a></li>
-                    <li><a href="#">DSO Transfer History</a></li>
-                </ul>
-            </div>
-
-            <div class="col-sm-9 col-xs-12 content">
+        <div class="content w-100 animate_animated animate_fadeInRight" id="content">
+            <div class="container">
+                <div class="mb-2 fledx-wrap">
+                    <button class="toggle-btn" id="toggleSidebar">☰</button>
+                    <button class="logout-btn" id="logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
                 @yield('content')
             </div>
         </div>
     </div>
-
-    {{-- jQuery & Bootstrap --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    {{-- Toastr JS --}}
+    <script src="{{ asset('js/admin/adminlayout/app.js') }}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
     <script>
         $(document).ready(function() {
+            toastr.success("{{ session('success','Successfully Login') }}");
             toastr.options = {
                 "closeButton": true,
                 "progressBar": true,
                 "positionClass": "toast-top-right",
                 "timeOut": "5000"
             };
+
             @if (session('success'))
                 toastr.success("{{ session('success') }}");
             @endif
