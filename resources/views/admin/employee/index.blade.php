@@ -70,10 +70,5 @@
         </div>
     </form>
 </div> --}}
-{{-- SS --}}
-{{-- adada --}}
-
-{{-- Anand --}}
-
 
 @endsection
