@@ -1,45 +1,200 @@
-body {
-    font-family: sans-serif;
+.sidebar {
+    height: 100vh;
+    background: linear-gradient(135deg, #34b505, #404ee8);
+    color: white;
+    position: fixed;
+    width: 250px;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
 }
 
-.sidebar {
-    background-color: #f0f0f0;
-    padding: 20px;
-    height: 100vh;
-    overflow-y: auto;
+.sidebar.collapsed {
+    width: 0px;
+}
+
+.sidebar .nav-link {
+    white-space: nowrap;
 }
 
 .content {
-    padding: 20px;
+    margin-left: 250px;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
 }
 
-@media (max-width: 767px) {
+.content.expanded {
+    margin-left: 0px;
+}
+
+.form-container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #404ee8;
+    box-shadow: 0px 0px 8px rgba(64, 78, 232, 0.5);
+}
+
+.submit-btn {
+    background: linear-gradient(45deg, #3bef59, #404ee8);
+    border: none;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(45deg, #404ee8, #3bef59);
+    color: white;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+.form-check-input {
+    transform: scale(1.2);
+    margin-left: 5px;
+}
+
+.toggle-btn {
+    background: #404ee8;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    float: right;
+}
+
+.logout-btn i {
+    color: #ef3b3b;
+}
+
+.fledx-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #56bd8a;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.collapsed + .toggle-btn {
+    left: 90px;
+}
+
+.heading {
+    position: relative;
+    color: #404ee8;
+    padding-bottom: 5px;
+}
+
+.heading::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 30%;
+    height: 3px;
+    background-color: #404ee8;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
     .sidebar {
-        height: auto;
-        overflow-y: visible;
+        z-index: 999;
     }
 
-    .row-offcanvas {
-        position: relative;
-        -webkit-transition: all 0.25s ease-out;
-        -moz-transition: all 0.25s ease-out;
-        -o-transition: all 0.25s ease-out;
-        transition: all 0.25s ease-out;
+    .content {
+        margin-left: 80px;
     }
 
-    .row-offcanvas.active {
-        left: 250px;
+    .toggle-btn {
+        left: 90px;
     }
+}
 
-    .sidebar-offcanvas {
-        position: absolute;
-        top: 0;
-        left: -250px;
-        width: 250px;
-        background-color: #f0f0f0;
-        -webkit-transition: all 0.25s ease-out;
-        -moz-transition: all 0.25s ease-out;
-        -o-transition: all 0.25s ease-out;
-        transition: all 0.25s ease-out;
-    }
+.profile-card {
+    margin: 10px;
+    padding: 8px;
+    background: #f8f9fa;
+    background: #86b7fe;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.profile-header {
+    background: linear-gradient(45deg, #dde1e7, #aab2bd);
+    height: 60px;
+}
+
+.profile-img {
+    margin-top: -40px;
+    border: 4px solid white;
+}
+
+.profile-name {
+    font-weight: bold;
+    font-size: 18px;
+    color: #212529;
+}
+
+.profile-text {
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.profile-badge {
+    font-weight: bold;
+    text-align: left;
+    margin-left: 15px;
+    color: #212529;
+}
+
+.profile-badge span {
+    font-weight: bold;
+    color: #000;
 }
