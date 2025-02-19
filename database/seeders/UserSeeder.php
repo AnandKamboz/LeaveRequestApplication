@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::create([
+        'secure_id'         => 'jsbd232snjcs8kd23l5zxq2u4tj',
         'name'              => 'admin',
         'email'             => 'admin@gmail.com',
         'mobile'            => '9720866645',
@@ -22,6 +23,7 @@ class UserSeeder extends Seeder
     ]);
 
     User::create([
+        'secure_id'         => 'g9hj3wz2bk5u8d1p7tq0lmnv4s6x',
         'name'              => 'Kapil',
         'email'             => 'kapil@example.com',
         'mobile'            => '9646096546',
