@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 use App\Models\RoleType;
 
 
-
 class AdminMiddleware
 {
     public function handle(Request $request, Closure $next): Response
@@ -25,9 +24,12 @@ class AdminMiddleware
                 return $next($request);
               }else{
                 Auth::logout();
-                return redirect('login');
+                return redirect('/');
               }
-        } 
+         }else{
+            Auth::logout();
+            return redirect('/');
+         }
 
     }
 }
