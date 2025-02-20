@@ -19,22 +19,24 @@
                     <img src="{{ asset('/images/image.png') }}" alt="Profile Picture" class="rounded-circle profile-img"
                         width="80" height="80">
                     <p class="profile-name">{{ ucfirst(Auth::user()->name) }}</p>
-                    <p class="profile-text">Department of IT, Haryana Government</p>
+                    <p class="profile-text">Department of NP, Haryana Government</p>
                     <p class="profile-text">सहारनपुर, उत्तर प्रदेश</p>
-                    <p class="profile-badge"><span>Department of IT</span></p>
+                    <p class="profile-badge"><span>Department of NP</span></p>
                     <p class="profile-badge"><span>Government of Haryana</span></p>
                 </div>
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item p-2">
-                    <a href="{{ route('admin.dashboard') }}" class="text-white active">Dashboard</a>
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="nav-link text-white nav-item nav-link {{ Request::is('admin/dashboard') || Request::is('admin/dashboard') ? 'active' : '' }}">Dashboard</a>
                 </li>
                 <li class="nav-item p-2">
-                    <a href="{{ route('admin.employees.index') }}" class="text-white">All Employees</a>
+                    <a href="{{ route('admin.employees.index') }}"
+                        class="nav-link text-white {{ Request::is('admin/employees') || Request::is('admin/employees') ? 'active' : '' }}">Leave
+                        Applications</a>
                 </li>
-                {{-- nav-link --}}
                 <li class="nav-item p-2">
-                    <a href="#" class="text-white">Settings</a>
+                    <a href="#" class="nav-link text-white">Settings</a>
                 </li>
             </ul>
         </div>
@@ -46,6 +48,10 @@
                     <button class="logout-btn" id="logout">
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
+
+                    <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    </form>
                 </div>
                 @yield('content')
             </div>
@@ -57,7 +63,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
-            // toastr.success("{{ session('success','Successfully Login') }}");
             toastr.options = {
                 "closeButton": true,
                 "progressBar": true,

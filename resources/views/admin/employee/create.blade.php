@@ -6,7 +6,11 @@
 
 @section('content')
 <div class="form-container animate_animated animate_zoomIn">
-    <h3 class="text-center mb-5 heading">Necessary Proceedings Application Form</h3>
+    <div class="new-class mb-5">
+        <a href="{{ route('admin.employees.index') }}" class="btn-employee btn-common ">Back</a>
+        <h3 class="text-center  heading"> Necessary Proceedings Application Form</h3>
+    </div>
+
     <form>
         <div class="row">
             <div class="col-md-6 mb-3">
