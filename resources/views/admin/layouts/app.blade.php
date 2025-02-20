@@ -32,8 +32,9 @@
                 </li>
                 <li class="nav-item p-2">
                     <a href="{{ route('admin.employees.index') }}"
-                        class="nav-link text-white {{ Request::is('admin/employees') || Request::is('admin/employees') ? 'active' : '' }}">Leave
-                        Applications</a>
+                        class="nav-link text-white {{ Request::is('admin/employees') || Request::is('admin/employees/create') ? 'active' : '' }}">Leave
+                        Management
+                    </a>
                 </li>
                 <li class="nav-item p-2">
                     <a href="#" class="nav-link text-white">Settings</a>
