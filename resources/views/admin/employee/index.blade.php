@@ -9,7 +9,7 @@
 
 
 <div class="mt-4">
-    <a href="{{ route('admin.employees.create') }}" class="btn-employee btn-common ">Add Employee</a>
+    <a href="{{ route('admin.employees.create') }}" class="btn-employee btn-common ">Add Leave</a>
 </div>
 
 
