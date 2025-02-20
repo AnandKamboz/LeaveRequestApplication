@@ -57,7 +57,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
-            toastr.success("{{ session('success','Successfully Login') }}");
+            // toastr.success("{{ session('success','Successfully Login') }}");
             toastr.options = {
                 "closeButton": true,
                 "progressBar": true,
