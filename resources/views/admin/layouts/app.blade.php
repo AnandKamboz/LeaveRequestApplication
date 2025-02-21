@@ -9,6 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.15.10/sweetalert2.css"
+        integrity="sha512-aT8kGTpksA05BegcQmkwCB142bJ9VHx8RAdt4FsCxivASGHCKrI3o1KX5oftKK8J8oZ5v450UtJPp66EJhEuHA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <body>
     <div class="d-flex">
@@ -37,7 +40,11 @@
                     </a>
                 </li>
                 <li class="nav-item p-2">
-                    <a href="#" class="nav-link text-white">Settings</a>
+                    <a href="{{ route('admin.user.create') }}" class="nav-link text-white">Add User</a>
+                </li>
+
+                <li class="nav-item p-2">
+                    <a href="{{ route('admin.company-names.create') }}" class="nav-link text-white">Add Company Name</a>
                 </li>
             </ul>
         </div>
@@ -58,36 +65,51 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.15.10/sweetalert2.min.js"
+        integrity="sha512-M60HsJC4M4A8pgBOj7oC/lvJXuOc9CraWXdD4PF+KNmKl8/Mnz6AH9FANgi4SJM6D9rqPvgQt4KRFR1rPN+EUw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('js/admin/adminlayout/app.js') }}"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "timeOut": "5000"
-            };
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "timeOut": "5000"
+                    };
 
-            @if (session('success'))
-                toastr.success("{{ session('success') }}");
-            @endif
+                    @if (session('success'))
+                        toastr.success("{{ session('success') }}");
+                    @endif
 
-            @if (session('error'))
-                toastr.error("{{ session('error') }}");
-            @endif
+                    @if (session('error'))
+                        toastr.error("{{ session('error') }}");
+                    @endif
 
-            @if (session('info'))
-                toastr.info("{{ session('info') }}");
-            @endif
+                    @if (session('info'))
+                        toastr.info("{{ session('info') }}");
+                    @endif
 
-            @if (session('warning'))
-                toastr.warning("{{ session('warning') }}");
-            @endif
+                    @if (session('warning'))
+                        toastr.warning("{{ session('warning') }}");
+                    @endif
+
+                   
+    });
+    </script>
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: "{{ session('success') }}",
+            confirmButtonText: 'OK',
         });
     </script>
+    @endif
 
 </body>
 
