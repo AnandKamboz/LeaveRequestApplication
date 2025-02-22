@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('secure_id');
             $table->string('leave_type');
             $table->integer('max_days')->default(0);
-            $table->string('description')->default(0);
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
