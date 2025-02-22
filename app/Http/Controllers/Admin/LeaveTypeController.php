@@ -50,12 +50,17 @@ class LeaveTypeController extends Controller
 
     public function edit( string $id )
     {
-        
+        $leaveType = LeaveType::where('secure_id',$id)->first();
+        return view('admin.leave_type.edit',compact('leaveType'));
+
     }
 
-    public function update( Request $request, string $id )
+    public function update( StoreLeaveTypeRequest $request, string $id )
     {
-        
+        $leaveType = LeaveType::where('secure_id', $id)->firstOrFail();
+        $leaveType->update($request->all());
+        return redirect()->route('admin.leave-types.index')->with('msg', 'Leave type updated successfully!');
+
     }
 
     public function destroy( string $id )

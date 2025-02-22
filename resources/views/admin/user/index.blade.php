@@ -32,43 +32,6 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
-                        @foreach($employees as $key => $employee)
-                        <tr>
-                            <td>{{ $key+1 }}</td>
-                            <td>{{ $employee->first_name . " " . ($employee->last_name ?? '') }}</td>
-                            <td>{{ $employee->email ?? '' }}</td>
-                            <td>{{ $employee->mobile ?? '' }}</td>
-                            <td>{{ $employee->date_of_joining ?? '' }}</td>
-                            <td>{{ $employee->salary ?? '' }}</td>
-                            <td>
-                                <a href="{{ route('admin.user.show',[$employee->secure_id]) }}"
-                                    class="btn btn-info btn-sm">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-
-
-                                @if (Auth::id() == null)
-                                <form id="delete-form-{{ $employee->secure_id }}"
-                                    action="{{ route('admin.user.destroy', [$employee->secure_id]) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" class="btn btn-danger btn-sm"
-                                        onclick="confirmDelete('{{ $employee->secure_id }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                                @else
-                                {{ '-' }}
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody> --}}
                     <tbody>
                         @foreach($employees as $key => $employee)
                         <tr>

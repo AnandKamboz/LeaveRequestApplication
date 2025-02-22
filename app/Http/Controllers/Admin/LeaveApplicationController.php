@@ -70,7 +70,7 @@ class LeaveApplicationController extends Controller
      */
     public function edit(LeaveApplication $leaveApplication)
     {
-        //
+        // dd('sdsds');
     }
 
     /**

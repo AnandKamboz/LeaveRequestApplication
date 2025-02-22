@@ -15,7 +15,7 @@
 <div class="container mt-4">
     <div class="card shadow-lg">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-            <h3 class="mb-0">Employee List</h3>
+            <h3 class="mb-0">Leave Types</h3>
             <a href="{{ route('admin.leave-types.create') }}" class="btn btn-light btn-sm">+ Add Leave Type</a>
         </div>
         <div class="card-body">
@@ -25,8 +25,8 @@
                         <tr>
                             <th>S.N.</th>
                             <th>Name</th>
-                            <th>Description</th>
                             <th>Max Leave Allow</th>
+                            <th>Description</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -34,15 +34,12 @@
                         @foreach ($leaveTypes as $key => $leaveType)
                         <tr>
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $leaveType->leave_type }}</td>
-                            <td>{{ $leaveType->description }}</td>
+                            <td>{{ ucfirst($leaveType->leave_type) }}</td>
                             <td>{{ $leaveType->max_days }}</td>
-
+                            <td>{{ ucfirst($leaveType->description) }}</td>
                             <td>
-                                {{-- <a href="" class="btn btn-info btn-sm">
-                                    <i class="fas fa-eye"></i>
-                                </a> --}}
-                                <a href="" class="btn btn-warning btn-sm">
+                                <a href="{{ route('admin.leave-types.edit', $leaveType->secure_id) }}"
+                                    class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
 
@@ -66,7 +63,16 @@
 </div>
 
 <script>
-    function confirmDelete(button) {
+    $(document).ready(function() {
+            $('#companyTable').DataTable({
+                "paging": true,
+                "ordering": true,
+                "info": true,
+                "searching": true
+            });
+        });
+
+        function confirmDelete(button) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
