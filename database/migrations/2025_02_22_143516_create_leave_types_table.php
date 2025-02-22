@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('company_names', function (Blueprint $table) {
+        Schema::create('leave_types', function (Blueprint $table) {
             $table->id();
             $table->string('secure_id');
-            $table->string('company_name', 100);
-            $table->text('description')->nullable();
+            $table->string('leave_type');
+            $table->integer('max_days')->default(0);
+            $table->string('description')->default(0);
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('company_names');
+        Schema::dropIfExists('leave_types');
     }
 };

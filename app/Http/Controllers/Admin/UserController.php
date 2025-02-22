@@ -16,12 +16,14 @@ class UserController extends Controller
     public function index()
     {
         $employees = User::all();
+        
         return view('admin.user.index',compact('employees'));
     }
 
     public function create()
     {
-        return view('admin.user.create');
+        $employeeName = User::select('first_name','last_name')->get();
+        return view('admin.user.create',compact('employeeName'));
     }
 
     public function store(StoreUserRequest  $request)

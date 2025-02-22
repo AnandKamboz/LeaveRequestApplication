@@ -1,12 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\LeaveTypeController;
 use App\Http\Controllers\Admin\CompanyNameController;
 use App\Http\Controllers\Admin\AdminEmployeeController;
+use App\Http\Controllers\Admin\LeaveApplicationController;
+
+
+
 
 
 
@@ -27,6 +32,8 @@ Route::prefix('admin')->name('admin.')->middleware([AdminMiddleware::class])->gr
     Route::resource('employees', AdminEmployeeController::class);
     Route::resource('user', UserController::class);
     Route::resource('company-names', CompanyNameController::class);
+    Route::resource('leave-applications', LeaveApplicationController::class);
+    Route::resource('leave-types', LeaveTypeController::class);
 });
 
 Route::post('/logout',[LoginController::class, 'logout'])->name('logout');

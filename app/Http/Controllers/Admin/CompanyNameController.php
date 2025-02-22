@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\CompanyName;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyNameRequest;
 
 
 class CompanyNameController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        // dd('Hello!');
+        $companyNames = CompanyName::orderBy('company_name', 'asc')->get();
+        return view('admin.company_names.index',compact('companyNames'));
+
     }
 
     /**
@@ -31,10 +32,15 @@ class CompanyNameController extends Controller
      */
     public function store(CompanyNameRequest $request)
     {
+        do {
+            $secureId = Str::random(32);
+        } while (CompanyName::where('secure_id', $secureId)->exists());
+        
         $companyName = new CompanyName();
+        $companyName->secure_id = $secureId;
         $companyName->company_name = $request->company_name;
         if($request->description){
-        $companyName->company_name = $request->description;
+           $companyName->description = $request->description;
         }
         $companyName->save();
         return redirect()->back()->with('msg', 'Company Name created successfully!');
@@ -44,9 +50,9 @@ class CompanyNameController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CompanyName $companyName)
+    public function show(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -68,8 +74,11 @@ class CompanyNameController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CompanyName $companyName)
+    public function destroy(Request $request,$id)
     {
-        //
+        $companyName = CompanyName::where('secure_id',$id)->first();
+        $companyName->delete();
+        return redirect()->back()->with('msg', 'Company deleted successfully.');
+
     }
 }

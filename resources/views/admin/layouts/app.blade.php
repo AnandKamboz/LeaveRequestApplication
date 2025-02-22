@@ -39,21 +39,30 @@
                         class="nav-link text-white nav-item nav-link {{ Request::is('admin/dashboard') || Request::is('admin/dashboard') ? 'active' : '' }}">Dashboard</a>
                 </li>
                 <li class="nav-item p-2">
-                    <a href="{{ route('admin.employees.index') }}"
+                    <a href="{{ route('admin.leave-applications.index') }}"
                         class="nav-link text-white {{ Request::is('admin/employees') || Request::is('admin/employees/create') ? 'active' : '' }}">Leave
                         Management
                     </a>
                 </li>
-                <li class="nav-item p-2">
+                {{-- <li class="nav-item p-2">
                     <a href="{{ route('admin.user.create') }}" class="nav-link text-white">Add Employee</a>
-                </li>
+                </li> --}}
 
                 <li class="nav-item p-2">
                     <a href="{{ route('admin.user.index') }}" class="nav-link text-white">View Employee</a>
                 </li>
 
-                <li class="nav-item p-2">
+
+                {{-- <li class="nav-item p-2">
                     <a href="{{ route('admin.company-names.create') }}" class="nav-link text-white">Add Company Name</a>
+                </li> --}}
+
+                <li class="nav-item p-2">
+                    <a href="{{ route('admin.company-names.index') }}" class="nav-link text-white">View Company Name</a>
+                </li>
+
+                <li class="nav-item p-2">
+                    <a href="{{ route('admin.leave-types.index') }}" class="nav-link text-white">Leave Type</a>
                 </li>
             </ul>
         </div>
