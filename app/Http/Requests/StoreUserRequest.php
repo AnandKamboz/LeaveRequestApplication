@@ -28,9 +28,10 @@ class StoreUserRequest extends FormRequest
             'mobile' => ['required', 'digits:10' , 'unique:users,mobile'],
             'gender' => ['required', 'in:Male,Female'],
             // 'company_group_id' => ['required', 'in:SISL,HKCL,TCS,Infosys'],
+            'company_group_id' => ['required'],
             'profile_photo' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], 
             'date_of_joining' => ['nullable', 'date', 'before_or_equal:today'],
-            'salary' => ['required', 'numeric', 'min:0'],
+            'salary' => ['required', 'numeric', 'min:0','max:999999'],
         ];
     }
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\CompanyName;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\CompanyNameRequest;
+
 
 class CompanyNameController extends Controller
 {
@@ -29,7 +31,14 @@ class CompanyNameController extends Controller
      */
     public function store(CompanyNameRequest $request)
     {
-        //
+        $companyName = new CompanyName();
+        $companyName->company_name = $request->company_name;
+        if($request->description){
+        $companyName->company_name = $request->description;
+        }
+        $companyName->save();
+        return redirect()->back()->with('msg', 'Company Name created successfully!');
+
     }
 
     /**

@@ -13,6 +13,11 @@
         integrity="sha512-aT8kGTpksA05BegcQmkwCB142bJ9VHx8RAdt4FsCxivASGHCKrI3o1KX5oftKK8J8oZ5v450UtJPp66EJhEuHA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css"
+        integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <body>
     <div class="d-flex">
         <div class="sidebar animate_animated animate_fadeInLeft " id="sidebar">
@@ -40,7 +45,11 @@
                     </a>
                 </li>
                 <li class="nav-item p-2">
-                    <a href="{{ route('admin.user.create') }}" class="nav-link text-white">Add User</a>
+                    <a href="{{ route('admin.user.create') }}" class="nav-link text-white">Add Employee</a>
+                </li>
+
+                <li class="nav-item p-2">
+                    <a href="{{ route('admin.user.index') }}" class="nav-link text-white">View Employee</a>
                 </li>
 
                 <li class="nav-item p-2">
@@ -70,8 +79,14 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('js/admin/adminlayout/app.js') }}"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function() {
                     toastr.options = {
@@ -100,12 +115,12 @@
                    
     });
     </script>
-    @if(session('success'))
+    @if(session('msg'))
     <script>
         Swal.fire({
             icon: 'success',
             title: 'Success',
-            text: "{{ session('success') }}",
+            text: "{{ session('msg') }}",
             confirmButtonText: 'OK',
         });
     </script>

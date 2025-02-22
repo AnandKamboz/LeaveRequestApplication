@@ -62,8 +62,8 @@
                 <label>Select Gender <span class="text-danger">*</span></label>
                 <select name="gender" id="gender" class="form-select">
                     <option value="">Select Gender</option>
-                    <option value="Male" {{ old('gender')=="Male" ? 'selected' : '' }}>Male</option>
-                    <option value="Female" {{ old('gender')=="Female" ? 'selected' : '' }}>Female</option>
+                    <option value="Male" {{ old('gender')=='Male' ? 'selected' : '' }}>Male</option>
+                    <option value="Female" {{ old('gender')=='Female' ? 'selected' : '' }}>Female</option>
                 </select>
                 @error('gender')
                 <div class="text-danger mt-1">{{ $message }}</div>
@@ -100,10 +100,10 @@
                 <label>Select Company Group <span class="text-danger">*</span></label>
                 <select name="company_group_id" id="company_group" class="form-select">
                     <option value="">Choose Company</option>
-                    <option value="1" {{ old('company_group_id')=="1" ? 'selected' : '' }}>SISL</option>
-                    <option value="2" {{ old('company_group_id')=="2" ? 'selected' : '' }}>HKCL</option>
-                    <option value="3" {{ old('company_group_id')=="3" ? 'selected' : '' }}>TCS</option>
-                    <option value="4" {{ old('company_group_id')=="4" ? 'selected' : '' }}>Infosys</option>
+                    <option value="1" {{ old('company_group_id')=='1' ? 'selected' : '' }}>SISL</option>
+                    <option value="2" {{ old('company_group_id')=='2' ? 'selected' : '' }}>HKCL</option>
+                    <option value="3" {{ old('company_group_id')=='3' ? 'selected' : '' }}>TCS</option>
+                    <option value="4" {{ old('company_group_id')=='4' ? 'selected' : '' }}>Infosys</option>
                 </select>
                 @error('company_group_id')
                 <div class="text-danger mt-1">{{ $message }}</div>
@@ -145,7 +145,7 @@
             let companyGroup = document.getElementById("company_group").value;
             let profile_photo = document.getElementById("profile_photo").value;
             let date_of_joining = document.getElementById("date_of_joining").value;
-            let salary = document.getElementById("salary").value;
+            let salary = document.getElementById("salary").value.trim();
 
 
 
@@ -216,6 +216,17 @@
                 return;
             }
 
+            if (salary === "" || isNaN(salary) || parseInt(salary) > 999999) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Salary must be a number and not exceed 6 digits!"
+                }).then(() => {
+                    document.getElementById("salary").focus();
+                });
+                return;
+            }
+
             this.submit();
         });
 
@@ -244,13 +255,13 @@
                     title: "Invalid File Type",
                     text: "Only PNG, JPG, and JPEG files are allowed!"
                 }).then(() => {
-                    document.getElementById("profile_photo").value = ""; 
+                    document.getElementById("profile_photo").value = "";
                     document.getElementById("profile_photo").focus();
                 });
                 return;
             }
 
-            let maxSize = 2 * 1024 * 1024 * 1024; 
+            let maxSize = 2 * 1024 * 1024 * 1024;
             if (file.size > maxSize) {
                 Swal.fire({
                     icon: "error",
@@ -263,7 +274,20 @@
                 return;
             }
         });
+
+        document.getElementById("salary").addEventListener("input", function () {
+          this.value = this.value.replace(/\D/g, '').slice(0, 6); 
+        });
+
+        // Restrict first name to letters only and max 25 characters
+        document.getElementById("first_name").addEventListener("input", function () {
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, "").slice(0, 25);
+        });
         
+        // Restrict last name to letters only and max 25 characters
+        document.getElementById("last_name").addEventListener("input", function () {
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, "").slice(0, 25);
+        });
 </script>
 
 

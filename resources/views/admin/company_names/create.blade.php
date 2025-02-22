@@ -7,7 +7,6 @@
 @section('content')
 <div class="form-container animate_animated animate_zoomIn">
     <div class="new-class mb-5">
-        <a href="{{ route('admin.employees.index') }}" class="btn-employee btn-common ">Back</a>
         <h3 class="text-center heading">Add Company</h3>
     </div>
 
@@ -57,16 +56,16 @@
             return;
         }
 
-        if (description === "") {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Please Enter Description!"
-            }).then(() => {
-                document.getElementById("description").focus();
-            });
-            return;
-        }
+        // if (description === "") {
+        //     Swal.fire({
+        //         icon: "error",
+        //         title: "Oops...",
+        //         text: "Please Enter Description!"
+        //     }).then(() => {
+        //         document.getElementById("description").focus();
+        //     });
+        //     return;
+        // }
 
         this.submit();
     });

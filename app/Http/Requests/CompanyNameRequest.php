@@ -14,7 +14,7 @@ class CompanyNameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_name' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'company_name' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/|unique:company_names,company_name',
             'description' => 'nullable|string|max:255',
         ];
     }
