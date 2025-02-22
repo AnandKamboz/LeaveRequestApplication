@@ -39,12 +39,16 @@
                             <td>{{ $leaveType->leave_type }}</td>
                             <td>{{ $leaveType->description }}</td>
                             <td>{{ $leaveType->max_days }}</td>
-
+                            {{-- ss --}}
                             <td>
                                 {{-- <a href="" class="btn btn-info btn-sm">
                                     <i class="fas fa-eye"></i>
                                 </a> --}}
-                                <a href="" class="btn btn-warning btn-sm">
+                                {{-- <a href="{{  }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a> --}}
+                                <a href="{{ route('admin.leave-types.edit', $leaveType->secure_id) }}"
+                                    class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
 
