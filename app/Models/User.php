@@ -41,4 +41,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function leaveApplications()
+    {
+        return $this->hasMany(LeaveApplication::class, 'employee_id');
+    }
 }
