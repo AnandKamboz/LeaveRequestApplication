@@ -73,7 +73,7 @@
                 "info": true,
                 "searching": true
             });
-        });
+    });
 
 
         function confirmDelete(secure_id) {
