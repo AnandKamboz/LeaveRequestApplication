@@ -31,6 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{-- jj --}}
 
                         @foreach ($leaveTypes as $key => $leaveType)
                         <tr>
