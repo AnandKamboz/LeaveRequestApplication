@@ -30,9 +30,8 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    {{-- hello --}}
-                    {{-- hello --}}
                     <tbody>
+                        {{-- jj --}}
 
                         @foreach ($leaveTypes as $key => $leaveType)
                         <tr>
