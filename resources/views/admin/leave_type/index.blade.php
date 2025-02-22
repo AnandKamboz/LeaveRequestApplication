@@ -39,7 +39,7 @@
                             <td>{{ $leaveType->leave_type }}</td>
                             <td>{{ $leaveType->description }}</td>
                             <td>{{ $leaveType->max_days }}</td>
-
+                            {{-- ss --}}
                             <td>
                                 {{-- <a href="" class="btn btn-info btn-sm">
                                     <i class="fas fa-eye"></i>
