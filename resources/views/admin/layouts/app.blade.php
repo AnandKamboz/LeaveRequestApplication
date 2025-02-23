@@ -49,7 +49,13 @@
                 </li> --}}
 
                 <li class="nav-item p-2">
-                    <a href="{{ route('admin.user.index') }}" class="nav-link text-white">View Employee</a>
+                    {{-- <a href="{{ route('admin.user.index') }}"
+                        class="nav-link text-white {{ Request::is('admin/user') || Request::is('admin/employees/create') ? 'active' : '' }}">View
+                        Employee</a> --}}
+                    <a href="{{ route('admin.user.index') }}"
+                        class="nav-link text-white {{ Request::is('admin/user*') || Request::is('admin/employees/create') ? 'active' : '' }}">
+                        View Employee
+                    </a>
                 </li>
 
 
