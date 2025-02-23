@@ -58,11 +58,19 @@
                 </li> --}}
 
                 <li class="nav-item p-2">
-                    <a href="{{ route('admin.company-names.index') }}" class="nav-link text-white">View Company Name</a>
+                    {{-- <a href="{{ route('admin.company-names.index') }}"
+                        class="nav-link text-white {{ Request::is('admin/company-names') || Request::is('admin/company-names/create') || || Request::is('admin/company-names/*') ? 'active' : '' }}">View
+                        Company Name</a> --}}
+                    <a href="{{ route('admin.company-names.index') }}"
+                        class="nav-link text-white {{ Request::is('admin/company-names') || Request::is('admin/company-names/create') || Request::is('admin/company-names/*') ? 'active' : '' }}">
+                        View Company Name
+                    </a>
                 </li>
 
                 <li class="nav-item p-2">
-                    <a href="{{ route('admin.leave-types.index') }}" class="nav-link text-white">Leave Type</a>
+                    <a href="{{ route('admin.leave-types.index') }}"
+                        class="nav-link text-white {{ Request::is('admin/leave-types') || Request::is('admin/leave-types/create') ? 'active' : '' }}">Leave
+                        Type</a>
                 </li>
             </ul>
         </div>

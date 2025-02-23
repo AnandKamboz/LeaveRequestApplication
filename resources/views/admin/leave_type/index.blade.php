@@ -15,7 +15,7 @@
 <div class="container mt-4">
     <div class="card shadow-lg">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-            <h3 class="mb-0">Employee List</h3>
+            <h3 class="mb-0">Leave Types</h3>
             <a href="{{ route('admin.leave-types.create') }}" class="btn btn-light btn-sm">+ Add Leave Type</a>
         </div>
         <div class="card-body">
