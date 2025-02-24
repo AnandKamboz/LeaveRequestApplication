@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('gender', ['Male', 'Female', 'Third Gender']);
             $table->date('date_of_joining')->nullable();
             $table->decimal('salary', 10, 2);
+            $table->string('reporting_officer')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

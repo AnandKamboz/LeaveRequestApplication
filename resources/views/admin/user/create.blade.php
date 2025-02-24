@@ -81,7 +81,8 @@
                             <option value="1" {{ old('company_group_id')=='1' ? 'selected' : '' }}>SISL</option>
                             <option value="2" {{ old('company_group_id')=='2' ? 'selected' : '' }}>HKCL</option>
                             <option value="3" {{ old('company_group_id')=='3' ? 'selected' : '' }}>TCS</option>
-                            <option value="4" {{ old('company_group_id')=='4' ? 'selected' : '' }}>Infosys</option>
+                            <option value="4" {{ old('company_group_id')=='4' ? 'selected' : '' }}>Infosys
+                            </option>
                         </select>
                         @error('company_group_id')
                         <div class="text-danger mt-1">{{ $message }}</div>
@@ -105,10 +106,47 @@
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn submit-btn">Submit</button>
-                </div>
+
+
+                    {{-- <div class="col-md-6 mb-3">
+                        <label>Reporting Officer <span class="text-danger">*</span></label>
+                        <input type="text" id="reporting_officer" name="reporting_officer" class="form-control"
+                            placeholder="Enter Reporting Officer Name" value="{{ old('reporting_officer') }}">
+                        @error('reporting_officer')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div> --}}
+
+                    {{-- <div class="col-md-6 mb-3">
+                        <label>Reporting Officer <span class="text-danger">*</span></label>
+                        <select id="reporting_officer" name="reporting_officer" class="form-control select2">
+                            <option value="">Select Reporting Officer</option>
+                            @foreach ($employeeName as $employee)
+                            <option value="{{ $employee->secure_id }}">
+                                {{ $employee->first_name }} {{ $employee->last_name }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+
+                    <div class="col-md-6 mb-3">
+                        <label>Reporting Officer <span class="text-danger">*</span></label>
+                        <select id="reporting_officer" name="reporting_officer" class="form-control select2">
+                            <option value="">Select Reporting Officer</option>
+
+                            @foreach ($allEmployees as $employee)
+                            <option value="{{ $employee->secure_id }}" {{ isset($editEmployee) && $editEmployee->
+                                reporting_officer ==
+                                $employee->secure_id ? 'selected' : '' }}>
+                                {{ $employee->first_name }} {{ $employee->last_name }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn submit-btn">Submit</button>
+                    </div>
             </form>
         </div>
     </div>
@@ -118,7 +156,6 @@
 <script>
     document.getElementById("userForm").addEventListener("submit", function(event) {
             event.preventDefault();
-
             let firstName = document.getElementById("first_name").value.trim();
             let email = document.getElementById("email").value.trim();
             let gender = document.getElementById("gender").value;
@@ -255,18 +292,18 @@
             }
         });
 
-        document.getElementById("salary").addEventListener("input", function () {
-          this.value = this.value.replace(/\D/g, '').slice(0, 6); 
+        document.getElementById("salary").addEventListener("input", function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 6);
         });
 
         // Restrict first name to letters only and max 25 characters
-        document.getElementById("first_name").addEventListener("input", function () {
-        this.value = this.value.replace(/[^a-zA-Z\s]/g, "").slice(0, 25);
+        document.getElementById("first_name").addEventListener("input", function() {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, "").slice(0, 25);
         });
-        
+
         // Restrict last name to letters only and max 25 characters
-        document.getElementById("last_name").addEventListener("input", function () {
-        this.value = this.value.replace(/[^a-zA-Z\s]/g, "").slice(0, 25);
+        document.getElementById("last_name").addEventListener("input", function() {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, "").slice(0, 25);
         });
 </script>
 

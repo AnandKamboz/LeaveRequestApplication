@@ -81,9 +81,12 @@
                         <label>Select Company Group <span class="text-danger">*</span></label>
                         <select name="company_group_id" id="company_group" class="form-select">
                             <option value="">Choose Company</option>
-                            <option value="1" {{ $employee->company_group_id == '1' ? 'selected' : '' }}>SISL</option>
-                            <option value="2" {{ $employee->company_group_id == '2' ? 'selected' : '' }}>HKCL</option>
-                            <option value="3" {{ $employee->company_group_id == '3' ? 'selected' : '' }}>TCS</option>
+                            <option value="1" {{ $employee->company_group_id == '1' ? 'selected' : '' }}>SISL
+                            </option>
+                            <option value="2" {{ $employee->company_group_id == '2' ? 'selected' : '' }}>HKCL
+                            </option>
+                            <option value="3" {{ $employee->company_group_id == '3' ? 'selected' : '' }}>TCS
+                            </option>
                             <option value="4" {{ $employee->company_group_id == '4' ? 'selected' : '' }}>Infosys
                             </option>
                         </select>
@@ -108,6 +111,18 @@
                         @error('salary')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Reporting Officer <span class="text-danger">*</span></label>
+                        <select id="reporting_officer" name="reporting_officer" class="form-control select2">
+                            <option value="">Select Reporting Officer</option>
+                            @foreach ($users as $user)
+                            <option value="{{ $user->secure_id }}" {{ isset($employee) && $employee->reporting_officer
+                                == $user->secure_id ? 'selected' : '' }}>
+                                {{ $user->first_name }} {{ $user->last_name }}
+                            </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="text-center">
@@ -248,18 +263,18 @@
             }
         });
 
-        document.getElementById("salary").addEventListener("input", function () {
-          this.value = this.value.replace(/\D/g, '').slice(0, 6); 
+        document.getElementById("salary").addEventListener("input", function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 6);
         });
 
         // Restrict first name to letters only and max 25 characters
-        document.getElementById("first_name").addEventListener("input", function () {
-        this.value = this.value.replace(/[^a-zA-Z\s]/g, "").slice(0, 25);
+        document.getElementById("first_name").addEventListener("input", function() {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, "").slice(0, 25);
         });
-        
+
         // Restrict last name to letters only and max 25 characters
-        document.getElementById("last_name").addEventListener("input", function () {
-        this.value = this.value.replace(/[^a-zA-Z\s]/g, "").slice(0, 25);
+        document.getElementById("last_name").addEventListener("input", function() {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, "").slice(0, 25);
         });
 </script>
 

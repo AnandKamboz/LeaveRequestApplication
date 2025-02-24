@@ -21,7 +21,7 @@ class UserController extends Controller {
     }
 
     public function create() {
-        $employeeName = User::select( 'first_name', 'last_name' )->get();
+        $employeeName = User::select('secure_id','first_name', 'last_name' )->get();
         return view( 'admin.user.create', compact( 'employeeName' ) );
     }
 
@@ -58,6 +58,9 @@ class UserController extends Controller {
         $user->gender = $request->gender;
         $user->date_of_joining = $request->date_of_joining;
         $user->salary = $request->salary;
+        if($request->reporting_officer && $request->reporting_officer != null){
+            $user->reporting_officer = $request->reporting_officer;
+        }
         $user->save();
 
         $roleType = new RoleType();
@@ -77,7 +80,9 @@ class UserController extends Controller {
 
     public function edit( string $id ) {
         $employee = User::where( 'secure_id', $id )->first();
-        return view( 'admin.user.edit', compact( 'employee' ) );
+        $users = User::all();
+        // dd($employee);
+        return view( 'admin.user.edit', compact( 'employee','users' ) );
     }
 
     public function update( Request $request, string $id ) {
@@ -102,6 +107,9 @@ class UserController extends Controller {
         $employee->gender = $request->gender;
         $employee->date_of_joining = $request->date_of_joining;
         $employee->salary = $request->salary;
+        if($employee->reporting_officer){
+            $employee->reporting_officer = $request->reporting_officer;
+        }
 
         if ( $request->hasFile( 'profile_photo' ) ) {
             if ($employee->profile_photo) {

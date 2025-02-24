@@ -29,29 +29,48 @@
                             <th>Designation</th>
                             <th>Place of Posting</th>
                             <th>Leave Type</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($allLeaveApplications as $key => $allLeaveApplication)
                         <tr>
-                            <td>{{ $key+1 }}</td>
+                            <td>{{ $key + 1 }}</td>
                             <td>{{ $allLeaveApplication->employee_name }}</td>
                             <td>{{ $allLeaveApplication->designation }}</td>
                             <td>{{ $allLeaveApplication->place_of_posting }}</td>
                             <td>{{ $allLeaveApplication->leave_type }}</td>
                             <td>
-                                <a href="" class="btn btn-info btn-sm">
+                                @if ($allLeaveApplication->status == 'approved')
+                                <span class="badge bg-success text-white px-3 py-2">Approved</span>
+                                @elseif ($allLeaveApplication->status == 'pending')
+                                <span class="badge bg-warning text-dark px-3 py-2">Pending</span>
+                                @elseif ($allLeaveApplication->status == 'rejected')
+                                <span class="badge bg-danger text-white px-3 py-2">Rejected</span>
+                                @else
+                                <span class="badge bg-secondary text-white px-3 py-2">{{ $allLeaveApplication->status
+                                    }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.leave-applications.show', $allLeaveApplication->secure_id) }}"
+                                    class="btn btn-info">
                                     <i class="fas fa-eye"></i>
                                 </a>
 
-                                <a href="" class="btn btn-warning btn-sm">
+                                <a href="{{ route('admin.leave-applications.edit', $allLeaveApplication->secure_id) }}"
+                                    class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form id="" action="" method="POST" class="d-inline">
+
+                                <form id="delete-form-{{ $allLeaveApplication->secure_id }}"
+                                    action="{{ route('admin.leave-applications.destroy', $allLeaveApplication->secure_id) }}"
+                                    method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="">
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                        onclick="confirmDelete('{{ $allLeaveApplication->secure_id }}')">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
@@ -73,13 +92,29 @@
                 "info": true,
                 "searching": true
             });
-    });
+        });
 
 
-        function confirmDelete(secure_id) {
+        // function confirmDelete(secure_id) {
+        //     Swal.fire({
+        //         title: "Are you sure?",
+        //         text: "You won't be able to revert this!",
+        //         icon: "warning",
+        //         showCancelButton: true,
+        //         confirmButtonColor: "#d33",
+        //         cancelButtonColor: "#3085d6",
+        //         confirmButtonText: "Yes, delete it!"
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             document.getElementById('deleteForm-' + secure_id).submit();
+        //         }
+        //     });
+        // }
+
+        function confirmDelete(secureId) {
             Swal.fire({
                 title: "Are you sure?",
-                text: "You won't be able to revert this!",
+                text: "This action cannot be undone!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#d33",
@@ -87,7 +122,7 @@
                 confirmButtonText: "Yes, delete it!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('deleteForm-' + secure_id).submit();
+                    document.getElementById('delete-form-' + secureId).submit();
                 }
             });
         }

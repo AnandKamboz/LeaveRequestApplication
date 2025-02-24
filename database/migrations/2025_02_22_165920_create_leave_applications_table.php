@@ -14,19 +14,16 @@ return new class extends Migration
         Schema::create('leave_applications', function (Blueprint $table) {
             $table->id();
             $table->string('secure_id', 32)->unique();
-            $table->string('employee_secure_id', 32)->unique();
-            $table->unsignedBigInteger('employee_id');
-            $table->unsignedBigInteger('leave_type_secure_id');
-            $table->unsignedBigInteger('leave_type_id');
-            
+            $table->string('employee_secure_id');
+            $table->string('leave_type');
             $table->string('employee_name');
             $table->string('designation');
             $table->string('place_of_posting');
-             $table->foreignId('leave_type');
             $table->date('leave_from');
             $table->date('leave_to');
             $table->text('leave_address');
             $table->text('leave_reason');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
