@@ -41,7 +41,8 @@
                                     <i class="fas fa-eye"></i>
                                 </a> --}}
 
-                                <a href="" class="btn btn-warning btn-sm">
+                                <a href="{{ route('admin.company-names.edit', $companyName->secure_id) }}"
+                                    class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <form id="deleteForm-{{ $companyName->secure_id }}"

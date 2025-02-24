@@ -58,17 +58,26 @@ class CompanyNameController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CompanyName $companyName)
+    public function edit(Request $request,$id)
     {
-        //
+        $companyName = CompanyName::where('secure_id',$id)->first();
+        return view('admin.company_names.edit',compact('companyName'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CompanyName $companyName)
+    public function update(Request $request, $id)
     {
-        //
+        $companyName = CompanyName::where('secure_id',$id)->first();
+        $companyName->company_name = $request->company_name;
+        if($companyName->description){
+            $companyName->description = $request->description;
+        }
+        $companyName->save();
+        return redirect()->route('admin.company-names.index')->with('msg', 'Company name updated successfully.');
+
     }
 
     /**
