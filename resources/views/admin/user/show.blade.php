@@ -63,10 +63,10 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="" class="btn btn-warning">
+            <a href="{{ url('admin/user/{id}/edit') }}" class="btn btn-warning">
                 <i class="fas fa-edit"></i> Edit
             </a>
-            <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">
+            <a href="{{ route('admin.user.index',[$employee->secure_id]) }}" class="btn btn-secondary">
                 <i class="fas fa-arrow-left"></i> Back
             </a>
         </div>

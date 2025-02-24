@@ -14,13 +14,15 @@
                 View Employee</a>
         </div>
         <div class="card-body">
-            <form id="userForm" enctype="multipart/form-data" method="post" action="{{ route('admin.user.store') }}">
+            <form id="userForm" enctype="multipart/form-data" method="post"
+                action="{{ route('admin.user.update', $employee->secure_id) }}">
                 @csrf
+                @method('put')
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label>First Name <span class="text-danger">*</span></label>
                         <input type="text" name="first_name" id="first_name" class="form-control"
-                            placeholder="Enter Name" value="{{ old('first_name') }}">
+                            placeholder="Enter Name" value="{{ $employee->first_name }}">
                         @error('first_name')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
@@ -28,7 +30,7 @@
                     <div class="col-md-6 mb-3">
                         <label>Last Name</label>
                         <input type="text" name="last_name" id="last_name" class="form-control"
-                            placeholder="Enter Last Name" value="{{ old('last_name') }}">
+                            placeholder="Enter Last Name" value="{{ $employee->last_name }}">
                         @error('last_name')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
@@ -37,7 +39,7 @@
                     <div class="col-md-6 mb-3">
                         <label>Profile Photo <span class="text-danger">*</span></label>
                         <input type="file" name="profile_photo" id="profile_photo" class="form-control"
-                            value="{{ old('profile_photo') }}">
+                            value="{{ $employee->profile_photo }}">
                         @error('profile_photo')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
@@ -46,7 +48,7 @@
                     <div class="col-md-6 mb-3">
                         <label>Email <span class="text-danger">*</span></label>
                         <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email"
-                            value="{{ old('email') }}">
+                            value="{{ $employee->email }}">
                         @error('email')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
@@ -55,7 +57,7 @@
                     <div class="col-md-6 mb-3">
                         <label>Phone Number <span class="text-danger">*</span></label>
                         <input type="text" id="mobile" name="mobile" class="form-control"
-                            placeholder="Enter Phone Number" value="{{ old('mobile') }}">
+                            placeholder="Enter Phone Number" value="{{ $employee->mobile }}">
                         @error('mobile')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
@@ -65,8 +67,9 @@
                         <label>Select Gender <span class="text-danger">*</span></label>
                         <select name="gender" id="gender" class="form-select">
                             <option value="">Select Gender</option>
-                            <option value="Male" {{ old('gender')=='Male' ? 'selected' : '' }}>Male</option>
-                            <option value="Female" {{ old('gender')=='Female' ? 'selected' : '' }}>Female</option>
+                            <option value="Male" {{ $employee->gender == 'Male' ? 'selected' : '' }}>Male</option>
+                            <option value="Female" {{ $employee->gender == 'Female' ? 'selected' : '' }}>Female
+                            </option>
                         </select>
                         @error('gender')
                         <div class="text-danger mt-1">{{ $message }}</div>
@@ -78,10 +81,13 @@
                         <label>Select Company Group <span class="text-danger">*</span></label>
                         <select name="company_group_id" id="company_group" class="form-select">
                             <option value="">Choose Company</option>
-                            <option value="1" {{ old('company_group_id')=='1' ? 'selected' : '' }}>SISL</option>
-                            <option value="2" {{ old('company_group_id')=='2' ? 'selected' : '' }}>HKCL</option>
-                            <option value="3" {{ old('company_group_id')=='3' ? 'selected' : '' }}>TCS</option>
-                            <option value="4" {{ old('company_group_id')=='4' ? 'selected' : '' }}>Infosys
+                            <option value="1" {{ $employee->company_group_id == '1' ? 'selected' : '' }}>SISL
+                            </option>
+                            <option value="2" {{ $employee->company_group_id == '2' ? 'selected' : '' }}>HKCL
+                            </option>
+                            <option value="3" {{ $employee->company_group_id == '3' ? 'selected' : '' }}>TCS
+                            </option>
+                            <option value="4" {{ $employee->company_group_id == '4' ? 'selected' : '' }}>Infosys
                             </option>
                         </select>
                         @error('company_group_id')
@@ -92,7 +98,7 @@
                     <div class="col-md-6 mb-3">
                         <label>Date of Joining <span class="text-danger">*</span></label>
                         <input type="date" id="date_of_joining" name="date_of_joining" class="form-control"
-                            max="{{ date('Y-m-d') }}" value="{{ old('date_of_joining') }}">
+                            max="{{ date('Y-m-d') }}" value="{{ $employee->date_of_joining }}">
                         @error('date_of_joining')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
@@ -101,52 +107,27 @@
                     <div class="col-md-6 mb-3">
                         <label>Salary <span class="text-danger">*</span></label>
                         <input type="number" id="salary" name="salary" class="form-control" placeholder="Enter Salary"
-                            value="{{ old('salary') }}" min="0" step="0.01">
+                            value="{{ $employee->salary }}" min="0" step="0.01">
                         @error('salary')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-
-
-                    {{-- <div class="col-md-6 mb-3">
-                        <label>Reporting Officer <span class="text-danger">*</span></label>
-                        <input type="text" id="reporting_officer" name="reporting_officer" class="form-control"
-                            placeholder="Enter Reporting Officer Name" value="{{ old('reporting_officer') }}">
-                        @error('reporting_officer')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                        @enderror
-                    </div> --}}
-
-                    {{-- <div class="col-md-6 mb-3">
-                        <label>Reporting Officer <span class="text-danger">*</span></label>
-                        <select id="reporting_officer" name="reporting_officer" class="form-control select2">
-                            <option value="">Select Reporting Officer</option>
-                            @foreach ($employeeName as $employee)
-                            <option value="{{ $employee->secure_id }}">
-                                {{ $employee->first_name }} {{ $employee->last_name }}
-                            </option>
-                            @endforeach
-                        </select>
-                    </div> --}}
-
                     <div class="col-md-6 mb-3">
                         <label>Reporting Officer <span class="text-danger">*</span></label>
                         <select id="reporting_officer" name="reporting_officer" class="form-control select2">
                             <option value="">Select Reporting Officer</option>
-
-                            @foreach ($allEmployees as $employee)
-                            <option value="{{ $employee->secure_id }}" {{ isset($editEmployee) && $editEmployee->
-                                reporting_officer ==
-                                $employee->secure_id ? 'selected' : '' }}>
-                                {{ $employee->first_name }} {{ $employee->last_name }}
+                            @foreach ($users as $user)
+                            <option value="{{ $user->secure_id }}" {{ isset($employee) && $employee->reporting_officer
+                                == $user->secure_id ? 'selected' : '' }}>
+                                {{ $user->first_name }} {{ $user->last_name }}
                             </option>
                             @endforeach
                         </select>
                     </div>
-
-                    <div class="text-center">
-                        <button type="submit" class="btn submit-btn">Submit</button>
-                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn submit-btn">Update</button>
+                </div>
             </form>
         </div>
     </div>
@@ -156,6 +137,7 @@
 <script>
     document.getElementById("userForm").addEventListener("submit", function(event) {
             event.preventDefault();
+
             let firstName = document.getElementById("first_name").value.trim();
             let email = document.getElementById("email").value.trim();
             let gender = document.getElementById("gender").value;
@@ -205,17 +187,6 @@
                     icon: "error",
                     title: "Oops...",
                     text: "Please Select Company Group!"
-                }).then(() => {
-                    document.getElementById("company_group").focus();
-                });
-                return;
-            }
-
-            if (profile_photo === "") {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Please Select Profile Photo!"
                 }).then(() => {
                     document.getElementById("company_group").focus();
                 });
