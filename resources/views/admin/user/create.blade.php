@@ -107,37 +107,12 @@
                         @enderror
                     </div>
 
-
-                    {{-- <div class="col-md-6 mb-3">
-                        <label>Reporting Officer <span class="text-danger">*</span></label>
-                        <input type="text" id="reporting_officer" name="reporting_officer" class="form-control"
-                            placeholder="Enter Reporting Officer Name" value="{{ old('reporting_officer') }}">
-                        @error('reporting_officer')
-                        <div class="text-danger mt-1">{{ $message }}</div>
-                        @enderror
-                    </div> --}}
-
-                    {{-- <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-3">
                         <label>Reporting Officer <span class="text-danger">*</span></label>
                         <select id="reporting_officer" name="reporting_officer" class="form-control select2">
                             <option value="">Select Reporting Officer</option>
                             @foreach ($employeeName as $employee)
                             <option value="{{ $employee->secure_id }}">
-                                {{ $employee->first_name }} {{ $employee->last_name }}
-                            </option>
-                            @endforeach
-                        </select>
-                    </div> --}}
-
-                    <div class="col-md-6 mb-3">
-                        <label>Reporting Officer <span class="text-danger">*</span></label>
-                        <select id="reporting_officer" name="reporting_officer" class="form-control select2">
-                            <option value="">Select Reporting Officer</option>
-
-                            @foreach ($allEmployees as $employee)
-                            <option value="{{ $employee->secure_id }}" {{ isset($editEmployee) && $editEmployee->
-                                reporting_officer ==
-                                $employee->secure_id ? 'selected' : '' }}>
                                 {{ $employee->first_name }} {{ $employee->last_name }}
                             </option>
                             @endforeach
