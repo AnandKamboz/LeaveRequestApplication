@@ -30,9 +30,11 @@
             <div class="d-flex justify-content-center align-items-center">
                 <div class="profile-card">
                     <div class="profile-header"></div>
-                    <img src="{{ asset('/images/image.png') }}" alt="Profile Picture" class="rounded-circle profile-img"
-                        width="80" height="80">
-                    <p class="profile-name">{{ ucfirst(Auth::user()->name) }}</p>
+                    <img src="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : asset('images/default.png') }}"
+                        alt="Profile Picture" class="rounded-circle profile-img" width="80" height="80">
+                    <p class="profile-name mt-1 ">
+                        {{ ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}
+                    </p>
                     <p class="profile-text">Department of NP, Haryana Government</p>
                     <p class="profile-text">सहारनपुर, उत्तर प्रदेश</p>
                     <p class="profile-badge"><span>Department of NP</span></p>

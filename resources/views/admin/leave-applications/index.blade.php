@@ -52,6 +52,22 @@
                                 <span class="badge bg-secondary text-white px-3 py-2">{{ $allLeaveApplication->status
                                     }}</span>
                                 @endif
+
+                                @if ($allLeaveApplication->status == 'pending')
+                                <form action="{{ route('admin.leave.updateStatus', $allLeaveApplication->secure_id) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="d-flex gap-2 mt-2">
+                                        <select name="status" class="form-select" required>
+                                            <option value="">Select</option>
+                                            <option value="approved">Approved</option>
+                                            <option value="rejected">Rejected</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </form>
+                                @endif
                             </td>
                             <td>
                                 <a href="{{ route('admin.leave-applications.show', $allLeaveApplication->secure_id) }}"
@@ -94,22 +110,6 @@
             });
         });
 
-
-        // function confirmDelete(secure_id) {
-        //     Swal.fire({
-        //         title: "Are you sure?",
-        //         text: "You won't be able to revert this!",
-        //         icon: "warning",
-        //         showCancelButton: true,
-        //         confirmButtonColor: "#d33",
-        //         cancelButtonColor: "#3085d6",
-        //         confirmButtonText: "Yes, delete it!"
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             document.getElementById('deleteForm-' + secure_id).submit();
-        //         }
-        //     });
-        // }
 
         function confirmDelete(secureId) {
             Swal.fire({
