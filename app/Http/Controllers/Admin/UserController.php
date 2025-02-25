@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller {
     public function index() {
         $employees = User::all();
-
         return view( 'admin.user.index', compact( 'employees' ) );
     }
 
     public function create() {
+         $companyNames = CompanyName::all();
         $employeeName = User::select('secure_id','first_name', 'last_name' )->get();
-        return view( 'admin.user.create', compact( 'employeeName' ) );
+        return view( 'admin.user.create', compact( 'employeeName','companyNames' ) );
     }
 
     public function store( StoreUserRequest  $request) {
