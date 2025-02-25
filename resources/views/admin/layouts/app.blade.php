@@ -17,6 +17,8 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css"
         integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Lightbox2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
     <style>
         .my-div {
             height: 45vh;
@@ -30,8 +32,14 @@
             <div class="d-flex justify-content-center align-items-center">
                 <div class="profile-card">
                     <div class="profile-header"></div>
-                    <img src="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : asset('images/default.png') }}"
-                        alt="Profile Picture" class="rounded-circle profile-img" width="80" height="80">
+                    {{-- <img
+                        src="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : asset('images/default.png') }}"
+                        alt="Profile Picture" class="rounded-circle profile-img" width="80" height="80"> --}}
+                    <a href="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : asset('images/default.png') }}"
+                        data-lightbox="profile" data-title="Profile Picture">
+                        <img src="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : asset('images/default.png') }}"
+                            alt="Profile Picture" class="rounded-circle profile-img" width="80" height="80">
+                    </a>
                     <p class="profile-name mt-1 ">
                         {{ ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}
                     </p>
@@ -190,6 +198,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
         integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Lightbox2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script>
         $(document).ready(function() {
             toastr.options = {
