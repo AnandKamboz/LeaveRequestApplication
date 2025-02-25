@@ -7,9 +7,69 @@ use App\Models\LeaveBalance;
 use Illuminate\Http\Request;
 use App\Models\LeaveApplication;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class LeaveController extends Controller
  {
+    // public function updateStatus( Request $request, $id )
+    // {
+    //     $leaveRequest = LeaveApplication::where( 'secure_id', $id )->first();
+    //     $leave_from = Carbon::parse( $leaveRequest->leave_from )->startOfDay();
+    //     $leave_to = Carbon::parse( $leaveRequest->leave_to )->startOfDay();
+    //     $leaveDays = intval( $leave_from->diffInDays( $leave_to ) + 1 );
+
+    //     if ( !$leaveRequest ) {
+    //         return response()->json( [ 'error' => 'Leave application not found.' ], 404 );
+    //     }
+
+    //     $request->validate( [
+    //         'status' => 'required|in:approved,rejected',
+    // ] );
+
+    //     $leaveType = LeaveType::where( 'leave_type', $leaveRequest->leave_type )->first();
+
+    //     if ( !$leaveType ) {
+    //         return response()->json( [ 'error' => 'Leave type not found.' ], 404 );
+    //     }
+
+    //     $leaveBalance = LeaveBalance::where( 'user_id', $leaveRequest->employee_secure_id )
+    //     ->where( 'leave_type', $leaveRequest->leave_type )
+    //     ->first();
+
+    //     $maxAllowedLeaves = $leaveType->max_days;
+
+    //     $usedLeaves = $leaveBalance ? $leaveBalance->used_leaves : 0;
+    //     $remainingLeaves = $maxAllowedLeaves - $usedLeaves;
+
+    //     if ( $request->status == 'approved' ) {
+    //         if ( $remainingLeaves >= $leaveDays ) {
+    //             if ( $leaveBalance ) {
+    //                 $leaveBalance->used_leaves += $leaveDays;
+    //                 $leaveBalance->remaining_leaves -= $leaveDays;
+    //                 $leaveBalance->save();
+    //             } else {
+    //                 LeaveBalance::create( [
+    //                     'user_id' => $leaveRequest->employee_secure_id,
+    //                     'leave_type' => $leaveRequest->leave_type,
+    //                     'total_leaves' => $maxAllowedLeaves,
+    //                     'used_leaves' => $leaveDays,
+    //                     'remaining_leaves' => $maxAllowedLeaves - $leaveDays,
+    //                     'start_date' => $leaveRequest->leave_from,
+    //                     'end_date' => $leaveRequest->leave_to,
+    // ] );
+    //             }
+
+    //             $leaveRequest->update( [ 'status' => 'approved' ] );
+    //         } else {
+    //             return response()->json( [ 'error' => 'No remaining leave balance.' ], 400 );
+    //         }
+    //     } else {
+    //         $leaveRequest->update( [ 'status' => 'rejected' ] );
+    //     }
+
+    //     return redirect()->back()->with( 'msg', 'Status Updated successfully.' );
+    // }
+
     // public function updateStatus( Request $request, $id )
     // {
     //     $leaveRequest = LeaveApplication::where( 'secure_id', $id )->first();
@@ -20,7 +80,7 @@ class LeaveController extends Controller
 
     //     $request->validate( [
     //         'status' => 'required|in:approved,rejected',
-    //     ] );
+    // ] );
 
     //     $leaveType = LeaveType::where( 'leave_type', $leaveRequest->leave_type )->first();
 
@@ -28,86 +88,123 @@ class LeaveController extends Controller
     //         return response()->json( [ 'error' => 'Leave type not found.' ], 404 );
     //     }
 
-    //     $leaveCount = LeaveBalance::where( 'user_id', $leaveRequest->employee_secure_id )
-    //     ->where( 'leave_type', $leaveRequest->leave_type )
-    //     ->count();
+    //     $leaveBalance = LeaveBalance::where( 'user_id', $leaveRequest->employee_secure_id )
+    //         ->where( 'leave_type', $leaveRequest->leave_type )
+    //         ->first();
 
-    //     $maxAllowedLeaves = LeaveType::where( 'leave_type', $leaveRequest->leave_type )->value( 'max_days' );
+    //     $maxAllowedLeaves = $leaveType->max_days;
+    //     $usedLeaves = $leaveBalance ? $leaveBalance->used_leaves : 0;
+    //     $remainingLeaves = $maxAllowedLeaves - $usedLeaves;
 
-    //     $remainingLeaves = $maxAllowedLeaves - $leaveCount;
+    //     $leave_from = Carbon::parse( $leaveRequest->leave_from )->startOfDay();
+    //     $leave_to = Carbon::parse( $leaveRequest->leave_to )->startOfDay();
+    //     $leaveDays = intval( $leave_from->diffInDays( $leave_to ) + 1 );
 
-    //     if ( $maxAllowedLeaves > $leaveCount ) {
-    //         $leave = new LeaveBalance();
-    //         $leave->user_id = $leaveRequest->employee_secure_id;
-    //         $leave->leave_type = $leaveRequest->leave_type;
-    //         $leave->total_leaves = $maxAllowedLeaves;
-    //         $leave->used_leaves = $leaveCount;
-    //         $leave->remaining_leaves = $remainingLeaves;
-    //         $leave->save();
-
-    //         LeaveApplication::where( 'secure_id', $id )->update([
-    //            'status'=>$request->status,
-    //         ]);
-    //     } else {
-    //         dd( 'Bye' );
+    //     if ( $leaveDays > $remainingLeaves ) {
+    //         return response()->json( [
+    //             'error' => 'You do not have enough leave balance. You have only ' . $remainingLeaves . ' leave(s) remaining.'
+    // ], 400 );
     //     }
 
-    //     return redirect()->back()->with('msg', 'Status Updated successfully.');
+    //     if ( $request->status == 'approved' ) {
+    //         if ( $remainingLeaves >= $leaveDays ) {
+    //             if ( $leaveBalance ) {
+    //                 $leaveBalance->used_leaves += $leaveDays;
+    //                 $leaveBalance->remaining_leaves -= $leaveDays;
+    //                 $leaveBalance->save();
+    //             } else {
+    //                 LeaveBalance::create( [
+    //                     'user_id' => $leaveRequest->employee_secure_id,
+    //                     'leave_type' => $leaveRequest->leave_type,
+    //                     'total_leaves' => $maxAllowedLeaves,
+    //                     'used_leaves' => $leaveDays,
+    //                     'remaining_leaves' => $maxAllowedLeaves - $leaveDays,
+    //                     'start_date' => $leaveRequest->leave_from,
+    //                     'end_date' => $leaveRequest->leave_to,
+    // ] );
+    //             }
 
+    //             $leaveRequest->update( [ 'status' => 'approved' ] );
+    //         } else {
+    //             return response()->json( [ 'error' => 'No remaining leave balance.' ], 400 );
+    //         }
+    //     } else {
+    //         $leaveRequest->update( [ 'status' => 'rejected' ] );
+    //     }
+
+    //     return redirect()->back()->with( 'msg', 'Status Updated successfully.' );
     // }
 
-    public function updateStatus(Request $request, $id)
-{
-    $leaveRequest = LeaveApplication::where('secure_id', $id)->first();
+    public function updateStatus( Request $request, $id )
+    {
+        $leaveRequest = LeaveApplication::where( 'secure_id', $id )->first();
+        // dd($leaveRequest->leave_type);
 
-    if (!$leaveRequest) {
-        return response()->json(['error' => 'Leave application not found.'], 404);
-    }
+        if ( !$leaveRequest ) {
+            return response()->json( [ 'error' => 'Leave application not found.' ], 404 );
+        }
 
-    $request->validate([
-        'status' => 'required|in:approved,rejected',
-    ]);
+        $request->validate( [
+            'status' => 'required|in:approved,rejected',
+        ] );
 
-    $leaveType = LeaveType::where('leave_type', $leaveRequest->leave_type)->first();
+        $leaveType = LeaveType::where( 'leave_type', $leaveRequest->leave_type )->first();
 
-    if (!$leaveType) {
-        return response()->json(['error' => 'Leave type not found.'], 404);
-    }
+        if ( !$leaveType ) {
+            return response()->json( [ 'error' => 'Leave type not found.' ], 404 );
+        }
 
-    $leaveBalance = LeaveBalance::where('user_id', $leaveRequest->employee_secure_id)
-        ->where('leave_type', $leaveRequest->leave_type)
+        $currentYear = Carbon::now()->year;
+
+        $leaveBalance = LeaveBalance::where( 'user_id', $leaveRequest->employee_secure_id )
+        ->where( 'leave_type', $leaveRequest->leave_type )
+        ->where( 'year', $currentYear )
         ->first();
 
-    $maxAllowedLeaves = $leaveType->max_days; 
-    $usedLeaves = $leaveBalance ? $leaveBalance->used_leaves : 0;
-    $remainingLeaves = $maxAllowedLeaves - $usedLeaves;
+        $maxAllowedLeaves = $leaveType->max_days;
+        $usedLeaves = $leaveBalance ? $leaveBalance->used_leaves : 0;
+        $remainingLeaves = $maxAllowedLeaves - $usedLeaves;
 
-    if ($request->status == 'approved') {
-        if ($remainingLeaves > 0) {
-            if ($leaveBalance) {
-                $leaveBalance->used_leaves += 1;
-                $leaveBalance->remaining_leaves -= 1;
-                $leaveBalance->save();
-            } else {
-                LeaveBalance::create([
-                    'user_id' => $leaveRequest->employee_secure_id,
-                    'leave_type' => $leaveRequest->leave_type,
-                    'total_leaves' => $maxAllowedLeaves,
-                    'used_leaves' => 1,
-                    'remaining_leaves' => $maxAllowedLeaves - 1,
-                ]);
-            }
+        $leave_from = Carbon::parse( $leaveRequest->leave_from )->startOfDay();
+        $leave_to = Carbon::parse( $leaveRequest->leave_to )->startOfDay();
+        $leaveDays = intval( $leave_from->diffInDays( $leave_to ) + 1 );
 
-            $leaveRequest->update(['status' => 'approved']);
-        } else {
-            return response()->json(['error' => 'No remaining leave balance.'], 400);
+         if ($leaveDays > $remainingLeaves) {
+            $currentYear = date('Y');
+            return redirect()->back()->with(
+                'wrong', 
+                'This Employee does not have enough leave balance.This Employee have only ' . " " . $remainingLeaves. " " . ucfirst($leaveRequest->leave_type). ' leave( s ) remaining for ' . $currentYear . '.'
+            );
         }
-    } else {
-        $leaveRequest->update(['status' => 'rejected']);
+
+        if ( $request->status == 'approved' ) {
+            if ( $remainingLeaves >= $leaveDays ) {
+                if ( $leaveBalance ) {
+                    $leaveBalance->used_leaves += $leaveDays;
+                    $leaveBalance->remaining_leaves -= $leaveDays;
+                    $leaveBalance->save();
+                } else {
+                    LeaveBalance::create( [
+                        'user_id' => $leaveRequest->employee_secure_id,
+                        'leave_type' => $leaveRequest->leave_type,
+                        'total_leaves' => $maxAllowedLeaves,
+                        'used_leaves' => $leaveDays,
+                        'remaining_leaves' => $maxAllowedLeaves - $leaveDays,
+                        'year' => $currentYear,
+                        'start_date' => $leaveRequest->leave_from,
+                        'end_date' => $leaveRequest->leave_to,
+                    ] );
+                }
+
+                $leaveRequest->update( [ 'status' => 'approved' ] );
+            } else {
+                return response()->json( [ 'error' => 'No remaining leave balance.' ], 400 );
+            }
+        } else {
+            $leaveRequest->update( [ 'status' => 'rejected' ] );
+        }
+
+        return redirect()->back()->with( 'msg', 'Status Updated successfully.' );
     }
-
-    return redirect()->back()->with('msg', 'Status Updated successfully.');
-}
-
 
 }

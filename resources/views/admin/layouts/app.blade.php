@@ -225,8 +225,9 @@
                 title: 'Success',
                 text: "{{ session('msg') }}",
                 confirmButtonText: 'OK',
-            });
+        });
 
+    
             document.addEventListener("DOMContentLoaded", function() {
                 var menuToggle = document.querySelector('[href="#leaveMenu"]');
                 var icon = menuToggle.querySelector("i");
@@ -310,6 +311,19 @@
             });
     </script>
     @endif
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            @if(session('wrong'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: "{{ session('wrong') }}",
+                    confirmButtonText: 'OK',
+                });
+            @endif
+        });
+    </script>
 
 </body>
 

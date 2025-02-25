@@ -18,6 +18,9 @@ return new class extends Migration
             $table->integer('total_leaves')->default(0);
             $table->integer('used_leaves')->default(0);
             $table->integer('remaining_leaves')->default(0);
+            $table->date('start_date')->nullable(); 
+            $table->date('end_date')->nullable(); 
+            $table->integer('year')->default(date('Y'));
             $table->timestamps();
         });
     }
