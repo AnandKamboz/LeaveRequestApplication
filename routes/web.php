@@ -5,6 +5,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\Admin\LeaveTypeController;
 use App\Http\Controllers\Admin\CompanyNameController;
 use App\Http\Controllers\Admin\AdminEmployeeController;
@@ -34,6 +35,7 @@ Route::prefix('admin')->name('admin.')->middleware([AdminMiddleware::class])->gr
     Route::resource('company-names', CompanyNameController::class);
     Route::resource('leave-applications', LeaveApplicationController::class);
     Route::resource('leave-types', LeaveTypeController::class);
+    Route::put('/leave/update-status/{secure_id}', [LeaveController::class, 'updateStatus'])->name('leave.updateStatus');
 });
 
 Route::post('/logout',[LoginController::class, 'logout'])->name('logout');

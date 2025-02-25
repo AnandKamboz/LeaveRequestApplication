@@ -102,7 +102,7 @@
                             <option value="">-- Select Employee --</option>
                             @foreach ($employeeNames as $employeeName)
                             <option value="{{ $employeeName->secure_id }}">
-                                {{ $employeeName->first_name . ' ' . $employeeName->last_name }}
+                                {{ ucfirst($employeeName->first_name . ' ' . $employeeName->last_name) }}
                             </option>
                             @endforeach
                         </select>
@@ -138,7 +138,7 @@
                             <option>Options</option>
                             @foreach ($leaveTypes as $leaveType)
                             <option value="{{ $leaveType->leave_type }}">
-                                {{ $leaveType->leave_type }}
+                                {{ ucfirst($leaveType->leave_type) }}
                             </option>
                             @endforeach
                         </select>
@@ -304,6 +304,12 @@
         // document.getElementById("contact_number").addEventListener("input", function() {
         //     this.value = this.value.replace(/\D/g, '');
         // });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            let today = new Date().toISOString().split("T")[0];
+            document.getElementById("leave_from").setAttribute("min", today);
+            document.getElementById("leave_to").setAttribute("min", today);
+        });
 </script>
 
 
