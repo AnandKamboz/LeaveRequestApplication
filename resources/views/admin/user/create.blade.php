@@ -74,20 +74,33 @@
                     </div>
 
 
+                    {{-- <div class="col-md-6 mb-3">
+                        <label>Select Company Group <span class="text-danger">*</span></label>
+                        @foreach($companyNames as $key => $companyName)
+                        <option value="{{ $companyName->secure_id }}">{{ $companyName->company_name }}</option>
+                        @endforeach
+                        @error('company_group_id')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div> --}}
+
                     <div class="col-md-6 mb-3">
                         <label>Select Company Group <span class="text-danger">*</span></label>
-                        <select name="company_group_id" id="company_group" class="form-select">
-                            <option value="">Choose Company</option>
-                            <option value="1" {{ old('company_group_id')=='1' ? 'selected' : '' }}>SISL</option>
-                            <option value="2" {{ old('company_group_id')=='2' ? 'selected' : '' }}>HKCL</option>
-                            <option value="3" {{ old('company_group_id')=='3' ? 'selected' : '' }}>TCS</option>
-                            <option value="4" {{ old('company_group_id')=='4' ? 'selected' : '' }}>Infosys
-                            </option>
+                        <select class="form-control" name="company_group_id">
+                            <option value="">-- Select Company Group --</option>
+                            @foreach($companyNames as $companyName)
+                            <option value="{{ $companyName->secure_id }}">{{ $companyName->company_name }}</option>
+                            @endforeach
                         </select>
                         @error('company_group_id')
                         <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
+
+
+
+
+
 
                     <div class="col-md-6 mb-3">
                         <label>Date of Joining <span class="text-danger">*</span></label>
