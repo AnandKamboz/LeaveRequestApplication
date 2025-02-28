@@ -147,7 +147,7 @@
             let firstName = document.getElementById("first_name").value.trim();
             let email = document.getElementById("email").value.trim();
             let gender = document.getElementById("gender").value;
-            let companyGroup = document.getElementById("company_group").value;
+            // let companyGroup = document.getElementById("company_group").value;
             let profile_photo = document.getElementById("profile_photo").value;
             let date_of_joining = document.getElementById("date_of_joining").value;
             let salary = document.getElementById("salary").value.trim();
@@ -188,16 +188,16 @@
                 return;
             }
 
-            if (companyGroup === "") {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Please Select Company Group!"
-                }).then(() => {
-                    document.getElementById("company_group").focus();
-                });
-                return;
-            }
+            // if (companyGroup === "") {
+            //     Swal.fire({
+            //         icon: "error",
+            //         title: "Oops...",
+            //         text: "Please Select Company Group!"
+            //     }).then(() => {
+            //         document.getElementById("company_group").focus();
+            //     });
+            //     return;
+            // }
 
             if (profile_photo === "") {
                 Swal.fire({

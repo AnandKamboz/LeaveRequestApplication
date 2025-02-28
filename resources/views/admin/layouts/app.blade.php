@@ -58,6 +58,84 @@
                     </li>
 
                     <li class="nav-item p-2">
+                        <a href="#companyMenu" class="nav-link text-white d-flex justify-content-between align-items-center 
+                                                {{ Request::is('admin/company-names*') ? 'active' : '' }}"
+                            data-bs-toggle="collapse"
+                            aria-expanded="{{ Request::is('admin/company-names*') ? 'true' : 'false' }}">
+                            Company Name <i class="fas fa-chevron-left ms-1"></i>
+                        </a>
+                        <ul id="companyMenu"
+                            class="collapse list-unstyled ms-3 {{ Request::is('admin/company-names*') ? 'show' : '' }}">
+
+                            <li class="nav-item p-2">
+                                <a href="{{ route('admin.company-names.create') }}"
+                                    class="nav-link text-white {{ Request::is('admin/company-names/create') ? 'active' : '' }}">
+                                    Add Company Name
+                                </a>
+                            </li>
+                            <li class="nav-item p-2">
+                                <a href="{{ route('admin.company-names.index') }}"
+                                    class="nav-link text-white {{ Request::is('admin/company-names') || (Request::is('admin/company-names/*') && !Request::is('admin/company-names/create')) ? 'active' : '' }}">
+                                    View Company Names
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item p-2">
+                        <a href="#leaveTypeMenu" class="nav-link text-white d-flex justify-content-between align-items-center 
+                                                {{ Request::is('admin/leave-types*') ? 'active' : '' }}"
+                            data-bs-toggle="collapse"
+                            aria-expanded="{{ Request::is('admin/leave-types*') ? 'true' : 'false' }}">
+                            Leave Type Management <i class="fas fa-chevron-left ms-1"></i>
+                        </a>
+                        <ul id="leaveTypeMenu"
+                            class="collapse list-unstyled ms-3 {{ Request::is('admin/leave-types*') ? 'show' : '' }}">
+
+                            <li class="nav-item p-2">
+                                <a href="{{ route('admin.leave-types.create') }}"
+                                    class="nav-link text-white {{ Request::is('admin/leave-types/create') ? 'active' : '' }}">
+                                    Add Leave Type
+                                </a>
+                            </li>
+
+                            <li class="nav-item p-2">
+                                <a href="{{ route('admin.leave-types.index') }}"
+                                    class="nav-link text-white {{ Request::is('admin/leave-types') || (Request::is('admin/leave-types/*') && !Request::is('admin/leave-types/create')) ? 'active' : '' }}">
+                                    View Leave Types
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item p-2">
+                        <a href="#employeeMenu" class="nav-link text-white d-flex justify-content-between align-items-center 
+                                               {{ Request::is('admin/user*') ? 'active' : '' }}"
+                            data-bs-toggle="collapse"
+                            aria-expanded="{{ Request::is('admin/user*') ? 'true' : 'false' }}">
+                            Employee Management <i class="fas fa-chevron-left ms-1"></i>
+                        </a>
+                        <ul id="employeeMenu"
+                            class="collapse list-unstyled ms-3 {{ Request::is('admin/user*') ? 'show' : '' }}">
+
+                            <li class="nav-item p-2">
+                                <a href="{{ route('admin.user.create') }}"
+                                    class="nav-link text-white {{ Request::is('admin/user/create') ? 'active' : '' }}">
+                                    Add Employee
+                                </a>
+                            </li>
+
+                            <li class="nav-item p-2">
+                                <a href="{{ route('admin.user.index') }}"
+                                    class="nav-link text-white {{ Request::is('admin/user') || (Request::is('admin/user/*') && !Request::is('admin/user/create')) ? 'active' : '' }}">
+                                    View Employees
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item p-2">
                         <a href="#leaveMenu"
                             class="nav-link text-white d-flex justify-content-between align-items-center 
                             {{ Request::is('admin/leave-applications') || Request::is('admin/leave-applications/*') ? 'active' : '' }}"
@@ -85,86 +163,16 @@
                         </ul>
                     </li>
 
-                    <script></script>
-
-                    <li class="nav-item p-2">
-                        <a href="#employeeMenu" class="nav-link text-white d-flex justify-content-between align-items-center 
-                           {{ Request::is('admin/user*') ? 'active' : '' }}" data-bs-toggle="collapse"
-                            aria-expanded="{{ Request::is('admin/user*') ? 'true' : 'false' }}">
-                            Employee Management <i class="fas fa-chevron-left ms-1"></i>
-                        </a>
-                        <ul id="employeeMenu"
-                            class="collapse list-unstyled ms-3 {{ Request::is('admin/user*') ? 'show' : '' }}">
-
-                            <li class="nav-item p-2">
-                                <a href="{{ route('admin.user.create') }}"
-                                    class="nav-link text-white {{ Request::is('admin/user/create') ? 'active' : '' }}">
-                                    Add Employee
-                                </a>
-                            </li>
-
-                            <li class="nav-item p-2">
-                                <a href="{{ route('admin.user.index') }}"
-                                    class="nav-link text-white {{ Request::is('admin/user') || (Request::is('admin/user/*') && !Request::is('admin/user/create')) ? 'active' : '' }}">
-                                    View Employees
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
 
 
 
-                    <li class="nav-item p-2">
-                        <a href="#companyMenu" class="nav-link text-white d-flex justify-content-between align-items-center 
-                            {{ Request::is('admin/company-names*') ? 'active' : '' }}" data-bs-toggle="collapse"
-                            aria-expanded="{{ Request::is('admin/company-names*') ? 'true' : 'false' }}">
-                            Company Name <i class="fas fa-chevron-left ms-1"></i>
-                        </a>
-                        <ul id="companyMenu"
-                            class="collapse list-unstyled ms-3 {{ Request::is('admin/company-names*') ? 'show' : '' }}">
-
-                            <li class="nav-item p-2">
-                                <a href="{{ route('admin.company-names.create') }}"
-                                    class="nav-link text-white {{ Request::is('admin/company-names/create') ? 'active' : '' }}">
-                                    Add Company Name
-                                </a>
-                            </li>
-                            <li class="nav-item p-2">
-                                <a href="{{ route('admin.company-names.index') }}"
-                                    class="nav-link text-white {{ Request::is('admin/company-names') || (Request::is('admin/company-names/*') && !Request::is('admin/company-names/create')) ? 'active' : '' }}">
-                                    View Company Names
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
 
 
 
-                    <li class="nav-item p-2">
-                        <a href="#leaveTypeMenu" class="nav-link text-white d-flex justify-content-between align-items-center 
-                            {{ Request::is('admin/leave-types*') ? 'active' : '' }}" data-bs-toggle="collapse"
-                            aria-expanded="{{ Request::is('admin/leave-types*') ? 'true' : 'false' }}">
-                            Leave Type Management <i class="fas fa-chevron-left ms-1"></i>
-                        </a>
-                        <ul id="leaveTypeMenu"
-                            class="collapse list-unstyled ms-3 {{ Request::is('admin/leave-types*') ? 'show' : '' }}">
 
-                            <li class="nav-item p-2">
-                                <a href="{{ route('admin.leave-types.create') }}"
-                                    class="nav-link text-white {{ Request::is('admin/leave-types/create') ? 'active' : '' }}">
-                                    Add Leave Type
-                                </a>
-                            </li>
 
-                            <li class="nav-item p-2">
-                                <a href="{{ route('admin.leave-types.index') }}"
-                                    class="nav-link text-white {{ Request::is('admin/leave-types') || (Request::is('admin/leave-types/*') && !Request::is('admin/leave-types/create')) ? 'active' : '' }}">
-                                    View Leave Types
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <script></script>
+
+
                 </ul>
 
             </div>
